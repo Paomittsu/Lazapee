@@ -3,7 +3,7 @@ from .models import *
 # Create your views here.
 def employees(request):
     emp = Employee.objects.all()
-    return render(request, 'lazapeeapp/employees.html', {'emp':emp})
+    return render(request, 'payroll_app/employees.html', {'emp':emp})
     
 def overtime(request, pk):
     if request.method == "POST":
@@ -28,14 +28,14 @@ def create_employee(request):
         Employee.objects.create(name=n, id_number=id, rate=r, allowance=a)
         return redirect('employees')
     else:
-        return render(request, 'lazapeeapp/create_employee.html')
+        return render(request, 'payroll_app/create_employee.html')
 
 def delete_employee(request, pk):
     Employee.objects.filter(pk=pk).delete()
     return redirect('employees')
 
 def update_employee(request):
-    return render(request, 'lazapeeapp/update_employee')
+    return render(request, 'payroll_app/update_employee')
 
 # def test(request, pk):
 #      Employee.objects.get(pk=pk).resetOvertime()
