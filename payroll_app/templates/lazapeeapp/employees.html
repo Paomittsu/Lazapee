@@ -1,0 +1,79 @@
+{% extends 'lazapeeapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class ="col-12">
+    <div style="display: flex; justify-content: space-between">
+        <span><h3> EMPLOYEES </h3></span>
+        <span><a href = "{% url 'create_employee'%}" class = "btn btn-secondary"> + Add Employee </a></span>
+    </div>
+    <table class = "table table-striped mb-5">
+        <thead class = "table-dark">
+            <tr>
+                <th scope = "col"> Name </th>
+                <th scope = "col"> ID Number </th>
+                <th scope = "col"> Rate </th>
+                <th scope = "col"> Allowance </th>
+                <th scope = "col"> Overtime </th>
+                <th scope = "col"> Options </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in emp %}
+            <tr>
+                <td>{{e.name}}</td>
+                <td>{{e.id_number}}</td>
+                <td>{{e.rate}}</td>
+                <td>{{e.allowance}}</td>
+                <td>{{e.overtime_pay|floatformat:2}}</td>
+                
+
+                <td class = "text-center">
+                    <a class="mb-3 btn btn-primary">Update</a> <!--insert href later once you've added the new tempaltes-->
+                    <a href="{% url 'delete_employee' pk=e.pk %}" class="mb-3 btn btn-danger">Delete</a>
+                    <a href="{% url 'test' pk=e.pk %}" class="mb-3 btn btn-danger">Reset</a>
+
+
+
+
+                    <form method="POST" action="{% url 'overtime' pk=e.pk %}">{% csrf_token %}
+                        <div class="row">
+                            <div class="col ">
+                                <input type="text" class="form-control" placeholder="Overtime Hours" name="overtime" aria-label="overtime_hours" required >
+                            </div>
+                            <div class="col-2 ">
+                                <button class="btn btn-outline-secondary" type="submit" style="margin-left: -2.5rem">Submit</button>
+                            </div>
+                        <div>
+                    </form>
+
+
+                </td>
+
+
+
+
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+<td class = "text-center">
+    <button type="submit" class="mb-3 btn btn-primary">Update</button> <!--insert href later once you've added the new tempaltes-->
+    <button type="submit" class="mb-3 btn btn-danger">Delete</button>
+    <form method="POST" action="{% url 'overtime' pk=e.pk  %}">{% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Overtime Hours" name="overtime" aria-label="overtime_hours">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+            </div>
+        </div>
+    <form>
+</td>
+
