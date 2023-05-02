@@ -37,8 +37,7 @@ def delete_employee(request, pk):
 def update_employee(request):
     return render(request, 'lazapeeapp/update_employee')
 
-def test(request, pk):
-     Employee.objects.get(pk=pk).resetOvertime()
-     a = Employee.objects.get(pk=pk).getOvertime()
-     return redirect('employees')
-     return render(request, 'lazapeeapp/test.html', {'a':a})
+# def test(request, pk):
+#      Employee.objects.get(pk=pk).resetOvertime()
+#      a = Employee.objects.get(pk=pk).getOvertime()
+#      return redirect('employees')
