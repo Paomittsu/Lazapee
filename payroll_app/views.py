@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-import calendar
+
 # Create your views here.
 def employees(request):
     emp = Employee.objects.all()
@@ -52,6 +52,34 @@ def update_employee(request, pk):
 def view_payslips(request):
     emp = Employee.objects.all()
     return render(request, 'payroll_app/payslips.html', {'emp':emp})
+
+def payslip_submit(request):
+    emp = Employee.objects.all()
+    a = request.POST.get('payslip_for')
+    b = request.POST.get('month')
+    c = 0
+    d = None
+
+    if a != "all":
+        d = Employee.objects.get(id_number=a).getID()
+        c = "Not all"
+    elif a == "all":  
+        for i in emp:
+            c+=1 #replace with create payslip object  
+    else:
+        pass
+
+    context = {
+        'a': a,
+        'b': b,
+        'c': c,
+        'd': d,
+    }
+
+    
+    
+
+    return render(request, 'payroll_app/test.html', context)
 
 # def test(request, pk):
 #      Employee.objects.get(pk=pk).resetOvertime()
