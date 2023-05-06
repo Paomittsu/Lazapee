@@ -23,11 +23,11 @@
         <tbody>
             {% for e in emp %}
             <tr>
-                <td>{{e.name}}</td>
-                <td>{{e.id_number}}</td>
-                <td>{{e.rate}}</td>
-                <td>{{e.allowance}}</td>
-                <td>{{e.overtime_pay|floatformat:2}}</td>
+                <td>{{e.getName}}</td>
+                <td>{{e.getID}}</td>
+                <td>{{e.getRate}}</td>
+                <td>{{e.getAllowance}}</td>
+                <td>{{e.getOvertime|floatformat:2}}</td>
                 
 
                 <td class = "text-center">

@@ -55,26 +55,73 @@ def view_payslips(request):
 
 def payslip_submit(request):
     emp = Employee.objects.all()
-    a = request.POST.get('payslip_for')
-    b = request.POST.get('month')
+    inp_for = request.POST.get('payslip_for')
+    inp_month = request.POST.get('month')
     c = 0
     d = None
+    inp_year = request.POST.get('year')
+    month30 = ["4", "6", "9", "11"]
+    leap_status = None
+    inp_cycle = request.POST.get('cycle')
 
-    if a != "all":
-        d = Employee.objects.get(id_number=a).getID()
-        c = "Not all"
-    elif a == "all":  
-        for i in emp:
-            c+=1 #replace with create payslip object  
+    # Leap year check
+    if int(inp_year) % 4 == 0:
+        if int(inp_year) % 100 == 0:
+            if int(inp_year) % 400 == 0:
+                leap_status = "LEAP!"
+            else:
+                leap_status = "NOT LEAP!"
+        else:    
+            leap_status = "LEAP!"
     else:
-        pass
+        leap_status = "NOT LEAP!"
+ 
+
+    day_range = None
+
+    if inp_cycle == "1":
+        day_range = "1-15"
+    if inp_cycle == "2":
+        if inp_month in month30:
+            day_range = "16-30"
+        elif inp_month == "2":
+            if leap_status == "LEAP!":
+                day_range = "16-29"
+            else:
+                day_range = "16-28"
+        else:
+            day_range = "16-31"
+
+    
+    if inp_for != "all":
+        active_id = Employee.objects.get(id_number=inp_for)
+        gross_pay = active_id.getRate() + active_id.getAllowance() + active_id.getOvertime()
+        philhealth = active_id.getRate() * 0.04
+        sss = active_id * 0.045
+
 
     context = {
-        'a': a,
-        'b': b,
-        'c': c,
-        'd': d,
+        'b':inp_month,
+        'd':d,
+        'l':leap_status,
+        'r':day_range,
+        'emp': emp,
     }
+
+
+    # elif inp_for == "all":  
+    #     for i in emp:
+    #         c+=1 #replace with create payslip object  
+    # else:
+    #     pass
+
+    # context = {
+    #     'a': inp_for,
+    #     'b': b,
+    #     'c': c,
+    #     'd': d,
+    #     'e':gross_pay,
+    # }
 
     
     
