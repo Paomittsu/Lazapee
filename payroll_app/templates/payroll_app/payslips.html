@@ -1,0 +1,21 @@
+{% extends 'payroll_app/base.html' %}
+
+{% block content %}
+<h3>PAYROLL CREATION</h3>
+
+<div>
+<form>
+    <label>Payroll for: </label>
+    <select stlye="width: 300px;" name="payslip_for">
+        <option selected>Choose...</option>
+        <option>All Employees</option>
+        {% for e in emp %}
+        <option>{{e.id_number}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label>Month</label>
+</form>
+
+</div>
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
+import calendar
 # Create your views here.
 def employees(request):
     emp = Employee.objects.all()
@@ -47,6 +48,10 @@ def update_employee(request, pk):
         return redirect('employees')
     else: 
         return render(request, 'payroll_app/update_employee.html', {'emp':emp})
+    
+def view_payslips(request):
+    emp = Employee.objects.all()
+    return render(request, 'payroll_app/payslips.html', {'emp':emp})
 
 # def test(request, pk):
 #      Employee.objects.get(pk=pk).resetOvertime()
