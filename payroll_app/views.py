@@ -34,8 +34,19 @@ def delete_employee(request, pk):
     Employee.objects.filter(pk=pk).delete()
     return redirect('employees')
 
-def update_employee(request):
-    return render(request, 'payroll_app/update_employee')
+def update_employee(request, pk):
+    emp = get_object_or_404(Employee, pk=pk)
+
+    if(request.method=="POST"):
+        n = request.POST.get('name')
+        id = request.POST.get('idnum')
+        r = request.POST.get('rate')
+        a = request.POST.get('allowance')
+
+        Employee.objects.filter(pk=pk).update(name=n, id_number=id, rate=r, allowance=a )
+        return redirect('employees')
+    else: 
+        return render(request, 'payroll_app/update_employee.html', {'emp':emp})
 
 # def test(request, pk):
 #      Employee.objects.get(pk=pk).resetOvertime()

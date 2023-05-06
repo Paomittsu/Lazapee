@@ -1,1 +1,43 @@
 {% extends 'payroll_app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="col-sm-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title" style = "text-align: center;"> Update Employee: </h3> 
+            </div>
+            <div class="card-body">
+
+                <form method="POST" action="{% url 'update_employee' pk=emp.pk %}">{% csrf_token %} 
+                
+                    <div class="form-group p-2">
+                        <label for="name"> Name: </label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{emp.name}}" required>
+                    </div>
+
+                    
+                    <div class="form-group p-2">
+                        <label for="idnum">ID Number: </label>
+                        <input type="text" class="form-control" id="idnum" name="idnum" value="{{emp.id_number}}"  required>
+                    </div>
+                
+                
+                    <div class="form-group p-2">
+                        <label for="rate"> Rate: </label>
+                        <input type="text" class="form-control" id="rate" name="rate" value="{{emp.rate}}" required>
+                    </div>
+
+                    <div class="form-group p-2">
+                        <label for="rate"><i>Allowance (Optional):</i></label>
+                        <input type="text" class="form-control" id="allowance" name="allowance" value="{{emp.allowance}}">
+                    </div>
+                    
+
+                    <div class = "row p-2"><button type="submit" class="mt-3 btn btn-primary">Update Employee</button></div>
+
+                </form>     
+            </div>
+        </div>
+    </div>
+{% endblock %}
