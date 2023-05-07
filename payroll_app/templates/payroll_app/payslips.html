@@ -47,4 +47,32 @@
 </form>
 
 </div>
+
+<div>
+    <table class="table table-striped">
+        <thead class = "table-dark">
+            <tr>
+                <th scope = "col"> ID number </th>
+                <th scope = "col"> Date </th>
+                <th scope = "col"> Cycle </th>
+                <th scope = "col"> Total Pay </th>
+                <th scope = "col"> Options </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in ptest %}
+            <tr>
+                
+                <td> {{e.getIDNumber.getID}} </td>
+                <td> {{e.getMonth}} </td>
+                <td> {{e.getPay_cycle}} </td>
+                <td> {{e.getTotal_pay}} </td>
+                <td> <a class="btn btn-primary" href="{% url 'view_payslip' pk=e.pk %}">Test</button> </a>
+            
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
 {% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'payroll_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class = "col-10 mx-auto" >
+
+    <!--Employee Info-->
+    <div class = "row">
+        <div class = "col">Name: [insert name]</div>
+        <div class = "col" style="text-align: right;">Date: [insert date]</div>
+    </div>
+
+    <div class = "row pb-4">
+        <div class = "col">ID: [insert ID]</div>
+        <div class = "col" style="text-align: right;">Payslip ID: [insert payslip ID]</div>
+    </div>
+
+    <div class = "row">
+       <div class = "col"></div>
+       <div class = "col" style="text-align:center"><b>AMOUNT</b></div>
+    </div>
+
+    <!--EARNINGS-->
+    <div class = "row">
+        <div class = "col pb-2"><b>EARNINGS:</b></div>
+        <div class = "col"></div>
+    </div>
+
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem;"> Base Pay:</div>
+        <div class = "col" >placeholder</div>
+    </div>
+
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem;"> Allowances:</div>
+        <div class = "col" >placeholder</div>
+    </div>
+
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem;"> Overtime:</div>
+        <div class = "col" >placeholder</div>
+    </div>
+
+    <div class = "row">
+        <div class = "col pb-2"><hr></div>
+        <div class = "col pb-2"><hr></div>
+    </div>
+
+    <div class = "row">
+        <div class = "col pb-4" style = "margin-left: 1.5rem;"><b>GROSS PAY</b></div>
+        <div class = "col pb-4" style="text-align:center"><b>placeholder</b></div>
+    </div>
+
+    <div class = "row" style = "margin-left: 0.09rem; margin-right: 0.09rem;">
+        <hr>
+    </div>
+
+    <!--DEDUCTIONS-->
+    <div class = "row">
+        <div class = "col pb-2"><b>DEDUCTIONS:</b></div>
+        <div class = "col"></div>
+    </div>
+
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem;"> W/HOLDING </div>
+        <div class = "col" >placeholder</div>
+    </div>
+
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem;"> PHILHEALTH </div>
+        <div class = "col" >placeholder</div>
+    </div>
+
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem;"> SSS </div>
+        <div class = "col" >placeholder</div>
+    </div>
+
+    <div class = "row">
+        <div class = "col pb-2"></div>
+        <div class = "col pb-2"><hr></div>
+    </div>
+
+    <div class = "row">
+        <div class = "col pb-4" style = "margin-left: 1.5rem;"><b>TOTAL DEDUCTIONS</b></div>
+        <div class = "col pb-4" style="text-align:center"><b>placeholder</b></div>
+    </div>
+
+    <div class = "row" style = "margin-left: 0.09rem; margin-right: 0.09rem;">
+        <hr>
+    </div>
+
+     <!--NET PAY-->
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem; font-size: 22px;"><b>NET PAY</b></div>
+        <div class = "col" style = "text-align: center; font-size: 22px;" >placeholder</div>
+    </div>
+
+</div>
+
+{% endblock %}
