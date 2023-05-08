@@ -8,7 +8,7 @@ urlpatterns = [
     path('overtime/<int:pk>/', views.overtime, name="overtime"),
     path('delete_employee/<int:pk>/', views.delete_employee, name="delete_employee"),
     path('update_employee/<int:pk>/', views.update_employee, name="update_employee"),
-    path('view_payslips', views.payslips, name="view_payslips"),
+    path('payslips', views.payslips, name="payslips"),
     path('test', views.payslip_submit, name="test"),
     path('view_payslip/<int:pk>', views.view_payslip, name="view_payslip"),
 ]
