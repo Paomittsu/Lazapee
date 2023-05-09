@@ -8,8 +8,32 @@
 
     <div style="display: flex; justify-content: space-between">
         <span><h3> EMPLOYEES </h3></span>
+        {% comment %} {% if messages %}
+        <div class="messages">
+        
+            {% for message in messages %}
+    
+            <p style="text-align: center;;">{{message}}</p>
+    
+        </div>
+        
+            {% endfor %}
+        {% endif %}  {% endcomment %}
+
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <div style="color:Green;">
+                {{message}}
+            </div>
+            {% elif message.tags == 'info' %}
+            <div style="color:Orange;">
+                {{message}}
+            </div>
+            {% endif %}
+        {% endfor %}
         <span><a href = "{% url 'create_employee'%}" class = "btn btn-secondary"> + Add Employee </a></span>
     </div>
+  
     <table class = "table table-striped mb-5">
         <thead class = "table-dark">
             <tr>
@@ -41,7 +65,7 @@
                     <form method="POST" action="{% url 'overtime' pk=e.pk %}">{% csrf_token %}
                         <div class="row">
                             <div class="col ">
-                                <input type="text" class="form-control" placeholder="Overtime Hours" name="overtime" aria-label="overtime_hours" required >
+                                <input type="number" class="form-control" placeholder="Overtime Hours" name="overtime" aria-label="overtime_hours" required >
                             </div>
                             <div class="col-2 ">
                                 <button class="btn btn-outline-secondary" type="submit" style="margin-left: -2.5rem">Submit</button>
@@ -56,19 +80,9 @@
         </tbody>
     </table>
 </div>
+
 {% endblock %}
 
 
-<td class = "text-center">
-    <button type="submit" class="mb-3 btn btn-primary">Update</button> <!--insert href later once you've added the new tempaltes-->
-    <button type="submit" class="mb-3 btn btn-danger">Delete</button>
-    <form method="POST" action="{% url 'overtime' pk=e.pk  %}">{% csrf_token %}
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Overtime Hours" name="overtime" aria-label="overtime_hours">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Submit</button>
-            </div>
-        </div>
-    <form>
-</td>
+
 

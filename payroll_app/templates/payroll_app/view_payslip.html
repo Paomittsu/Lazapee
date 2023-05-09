@@ -7,7 +7,7 @@
     <!--Employee Info-->
     <div class = "row">
         <div class = "col">Name: {{d.getIDNumber.getName}}</div>
-        <div class = "col" style="text-align: right;">Date: {{d.getMonth}}, {{d.getDate_range}}, {{d.getYear}}</div>
+        <div class = "col" style="text-align: right;">Date: {{d.getMonth}} {{d.getDate_range}}, {{d.getYear}}</div>
     </div>
 
     <div class = "row pb-4">
@@ -28,17 +28,17 @@
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> Base Pay:</div>
-        <div class = "col" >{{d.getCycleRate}}</div>
+        <div class = "col" >{{d.getCycleRate|floatformat:2}}</div>
     </div>
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> Allowances:</div>
-        <div class = "col" >{{d.getEarnings_allowance}}</div>
+        <div class = "col" >{{d.getEarnings_allowance|floatformat:2}}</div>
     </div>
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> Overtime:</div>
-        <div class = "col" >{{d.getOvertime}}</div>
+        <div class = "col" >{{d.getOvertime|floatformat:2}}</div>
     </div>
 
     <div class = "row">
@@ -48,7 +48,7 @@
 
     <div class = "row">
         <div class = "col pb-4" style = "margin-left: 1.5rem;"><b>GROSS PAY</b></div>
-        <div class = "col pb-4" style="text-align:center"><b>PHP {{earnings}}</b></div>
+        <div class = "col pb-4" style="text-align:center"><b>PHP {{earnings|floatformat:2}}</b></div>
     </div>
 
     <div class = "row" style = "margin-left: 0.09rem; margin-right: 0.09rem;">
@@ -63,17 +63,17 @@
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> W/HOLDING </div>
-        <div class = "col" >{{d.getDeductions_tax}}</div>
+        <div class = "col" >{{d.getDeductions_tax|floatformat:2}}</div>
     </div>
     {% if d.getPag_ibig == 0 %}
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> PHILHEALTH </div>
-        <div class = "col" >{{d.getDeductions_health}}</div>
+        <div class = "col" >{{d.getDeductions_health|floatformat:2}}</div>
     </div>
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> SSS </div>
-        <div class = "col" >{{d.getSSS}}</div>
+        <div class = "col" >{{d.getSSS|floatformat:2}}</div>
     </div>
 
     {% else %}
@@ -90,7 +90,7 @@
 
     <div class = "row">
         <div class = "col pb-4" style = "margin-left: 1.5rem;"><b>TOTAL DEDUCTIONS</b></div>
-        <div class = "col pb-4" style="text-align:center"><b>PHP {{deductions}}</b></div>
+        <div class = "col pb-4" style="text-align:center"><b>PHP {{deductions|floatformat:2}}</b></div>
     </div>
 
     <div class = "row" style = "margin-left: 0.09rem; margin-right: 0.09rem;">

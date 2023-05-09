@@ -12,6 +12,7 @@ def overtime(request, pk):
         emp_r = Employee.objects.get(pk=pk).getRate()
         ot = (emp_r/160) * float(1.5) * float(inp_o) 
         Employee.objects.filter(pk=pk).update(overtime_pay=ot)
+        messages.success(request, 'Overtime pay added!')
         return redirect('employees') 
     else:
         return redirect('employees') 
@@ -32,12 +33,14 @@ def create_employee(request):
         
         else:
             Employee.objects.create(name=n, id_number=id, rate=r, allowance=a)
+            messages.success(request, "Employee was successfully added!")
             return redirect('employees')
     else:
         return render(request, 'payroll_app/create_employee.html')    
 
 def delete_employee(request, pk):
     Employee.objects.filter(pk=pk).delete()
+    messages.info(request, 'Employee was deleted!')
     return redirect('employees')
 
 def update_employee(request, pk):
@@ -52,12 +55,14 @@ def update_employee(request, pk):
 
         if emp.getID() == id:
             Employee.objects.filter(pk=pk).update(name=n, id_number=id, rate=r, allowance=a)
+            messages.success(request, 'Employee was successfully updated!')
             return redirect('employees')
         elif Employee.objects.filter(id_number=id).exists():
             messages.error(request, "An employee with this ID number already exists")
             return redirect('update_employee', pk=pk)
         else:
             Employee.objects.filter(pk=pk).update(name=n, id_number=id, rate=r, allowance=a)
+            messages.success(request, 'Employee was successfully updated!')
             return redirect('employees')
     else: 
         return render(request, 'payroll_app/update_employee.html', {'emp':emp})
@@ -74,7 +79,7 @@ def payslip_submit(request):
         inp_for = request.POST.get('payslip_for')
         inp_month = request.POST.get('month')
         inp_year = request.POST.get('year')
-        month30 = ["4", "6", "9", "11"]
+        month30 = ["April", "June", "September", "November"]
         leap_status = None
         day_range = None
         inp_cycle = request.POST.get('cycle')
