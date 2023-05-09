@@ -9,6 +9,6 @@ urlpatterns = [
     path('delete_employee/<int:pk>/', views.delete_employee, name="delete_employee"),
     path('update_employee/<int:pk>/', views.update_employee, name="update_employee"),
     path('payslips', views.payslips, name="payslips"),
-    path('test', views.payslip_submit, name="test"),
+    path('payslip_submit', views.payslip_submit, name="payslip_submit"),
     path('view_payslip/<int:pk>', views.view_payslip, name="view_payslip"),
 ]

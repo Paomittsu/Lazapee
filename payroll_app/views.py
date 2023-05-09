@@ -24,7 +24,7 @@ def create_employee(request):
         r = request.POST.get('rate')
         a = request.POST.get('allowance')
         if a == "":
-            a = None
+            a = 0
 
         if Employee.objects.filter(id_number=id).exists():
             messages.error(request, "An employee with this ID number already exists")
@@ -49,14 +49,13 @@ def update_employee(request, pk):
         r = request.POST.get('rate')
         a = request.POST.get('allowance')
 
-        if Employee.objects.get(id_number=id).getID() == id:
+
+        if emp.getID() == id:
             Employee.objects.filter(pk=pk).update(name=n, id_number=id, rate=r, allowance=a)
             return redirect('employees')
-        
         elif Employee.objects.filter(id_number=id).exists():
             messages.error(request, "An employee with this ID number already exists")
             return redirect('update_employee', pk=pk)
-        
         else:
             Employee.objects.filter(pk=pk).update(name=n, id_number=id, rate=r, allowance=a)
             return redirect('employees')
@@ -200,7 +199,6 @@ def view_payslip(request, pk):
         'earnings':earnings,
         'deductions': deductions,
     }
-    return render(request, 'payroll_app/view_payslip.html', context)
 
 
 
