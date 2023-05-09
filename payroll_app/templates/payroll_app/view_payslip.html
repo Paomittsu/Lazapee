@@ -6,13 +6,13 @@
 
     <!--Employee Info-->
     <div class = "row">
-        <div class = "col">Name: [insert name]</div>
-        <div class = "col" style="text-align: right;">Date: [insert date]</div>
+        <div class = "col">Name: {{d.getIDNumber.getName}}</div>
+        <div class = "col" style="text-align: right;">Date: {{d.getMonth}}, {{d.getDate_range}}, {{d.getYear}}</div>
     </div>
 
     <div class = "row pb-4">
-        <div class = "col">ID: [insert ID]</div>
-        <div class = "col" style="text-align: right;">Payslip ID: [insert payslip ID]</div>
+        <div class = "col">ID: {{d.getIDNumber.getID}}</div>
+        <div class = "col" style="text-align: right;">Payslip ID: {{d.pk}}</div>
     </div>
 
     <div class = "row">
@@ -28,17 +28,17 @@
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> Base Pay:</div>
-        <div class = "col" >placeholder</div>
+        <div class = "col" >{{d.getCycleRate}}</div>
     </div>
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> Allowances:</div>
-        <div class = "col" >placeholder</div>
+        <div class = "col" >{{d.getEarnings_allowance}}</div>
     </div>
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> Overtime:</div>
-        <div class = "col" >placeholder</div>
+        <div class = "col" >{{d.getOvertime}}</div>
     </div>
 
     <div class = "row">
@@ -48,7 +48,7 @@
 
     <div class = "row">
         <div class = "col pb-4" style = "margin-left: 1.5rem;"><b>GROSS PAY</b></div>
-        <div class = "col pb-4" style="text-align:center"><b>placeholder</b></div>
+        <div class = "col pb-4" style="text-align:center"><b>PHP {{earnings}}</b></div>
     </div>
 
     <div class = "row" style = "margin-left: 0.09rem; margin-right: 0.09rem;">
@@ -63,18 +63,25 @@
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> W/HOLDING </div>
-        <div class = "col" >placeholder</div>
+        <div class = "col" >{{d.getDeductions_tax}}</div>
     </div>
-
+    {% if d.getPag_ibig == 0 %}
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> PHILHEALTH </div>
-        <div class = "col" >placeholder</div>
+        <div class = "col" >{{d.getDeductions_health}}</div>
     </div>
 
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem;"> SSS </div>
-        <div class = "col" >placeholder</div>
+        <div class = "col" >{{d.getSSS}}</div>
     </div>
+
+    {% else %}
+    <div class = "row">
+        <div class = "col" style = "margin-left: 1.5rem;"> PAG-IBIG </div>
+        <div class = "col" >{{d.getPag_ibig}}</div>
+    </div>
+    {% endif %}
 
     <div class = "row">
         <div class = "col pb-2"></div>
@@ -83,7 +90,7 @@
 
     <div class = "row">
         <div class = "col pb-4" style = "margin-left: 1.5rem;"><b>TOTAL DEDUCTIONS</b></div>
-        <div class = "col pb-4" style="text-align:center"><b>placeholder</b></div>
+        <div class = "col pb-4" style="text-align:center"><b>PHP {{deductions}}</b></div>
     </div>
 
     <div class = "row" style = "margin-left: 0.09rem; margin-right: 0.09rem;">
@@ -93,7 +100,7 @@
      <!--NET PAY-->
     <div class = "row">
         <div class = "col" style = "margin-left: 1.5rem; font-size: 22px;"><b>NET PAY</b></div>
-        <div class = "col" style = "text-align: center; font-size: 22px;" >placeholder</div>
+        <div class = "col" style = "text-align: center; font-size: 22px;" ><b>PHP {{d.getTotal_pay}}</b></div>
     </div>
 
 </div>

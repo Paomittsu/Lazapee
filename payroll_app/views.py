@@ -24,7 +24,7 @@ def create_employee(request):
         r = request.POST.get('rate')
         a = request.POST.get('allowance')
         if a == "":
-            a = 0
+            a = None
 
         if Employee.objects.filter(id_number=id).exists():
             messages.error(request, "An employee with this ID number already exists")
@@ -127,7 +127,7 @@ def payslip_submit(request):
                 total_deductions = tax + pag_ibig
                 net_pay = gross_pay - total_deductions
 
-
+            
             Payslip.objects.create(id_number=active_id,
                                 month=inp_month,
                                 date_range=day_range,
@@ -142,6 +142,7 @@ def payslip_submit(request):
                                 overtime=active_id.getOvertime(),
                                 total_pay=net_pay,
                                 )
+            active_id.resetOvertime()
             
 
             return redirect('payslips')
@@ -166,6 +167,7 @@ def payslip_submit(request):
                     tax = (gross_pay - pag_ibig)*0.2
                     total_deductions = tax + pag_ibig
                     net_pay = gross_pay - total_deductions
+
                 
                 Payslip.objects.create(id_number=active_id,
                                 month=inp_month,
@@ -181,6 +183,7 @@ def payslip_submit(request):
                                 overtime=active_id.getOvertime(),
                                 total_pay=net_pay,
                                 )
+                active_id.resetOvertime()
             return redirect('payslips')
       
     else:
@@ -189,7 +192,15 @@ def payslip_submit(request):
 
 def view_payslip(request, pk):
     d = get_object_or_404(Payslip, pk=pk)
-    return render(request, 'payroll_app/view_payslip.html', {'d':d})
+    earnings = d.getCycleRate() + d.getEarnings_allowance() + d.getOvertime()
+    deductions = d.getPag_ibig() + d.getDeductions_health() + d.getDeductions_tax() + d.getSSS()
+
+    context = {
+        'd': d,
+        'earnings':earnings,
+        'deductions': deductions,
+    }
+    return render(request, 'payroll_app/view_payslip.html', context)
 
 
 

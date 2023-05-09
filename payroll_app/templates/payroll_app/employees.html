@@ -26,8 +26,8 @@
                 <td>{{e.getName}}</td>
                 <td>{{e.getID}}</td>
                 <td>{{e.getRate}}</td>
-                <td>{{e.getAllowance}}</td>
-                <td>{{e.getOvertime|floatformat:2}}</td>
+                <td>{{e.getAllowance|floatformat:2|default:"0"}}</td>
+                <td>{{e.getOvertime|floatformat:2|default:"0"}}</td>
                 
 
                 <td class = "text-center">
