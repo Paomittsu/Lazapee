@@ -1,28 +1,124 @@
 {% extends 'payroll_app/base.html' %}
 {% load static %}
 
+
+
 {% block content %}
-<form class="form-inline">
-    <div class="border mx-auto text-center" style="width: 500px;">
-        <label class="label-control">Test</label>
-        <input type="text" class="form-control">
+<h3 style="margin-left:-0.7rem;">Payslips</h3>
+
+<form method="POST" class="form-inline pt-4" style="background-color:#F8F8FF;"  action="{% url 'payslip_submit' %}"> 
+    {% csrf_token %}
+    
+
+    <!-- Payslip for -->
+    <div class="row justify-content-center pb-3 pt-2" style="margin-left: -2.7rem">
+        <div class="col-1 pt-1 " style="width: 101px">
+            <label>Payroll for: </label>
+        </div>
+
+        <div class="col-3 ">
+            <select class="form-select" name="payslip_for" required>
+                <option value="" disabled selected>Choose...</option>
+                <option value="all">All employees</option>
+                {% for e in emp %}
+                <option> {{e.getID}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <center><hr></center>
+    
+    <!-- Month -->
+    <div class="row justify-content-center pt-3">
+        <div class="col-1 pt-1 " style="width: 60px">
+            <label>Month: </label>
+        </div>
+
+        <div class="col-3 ">
+            <select class="form-select" name="month" required>
+                <option value="" disabled selected>Choose...</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+               
+            </select>
+        </div>
+
+        <!-- Year -->
+        <div class="col-1 pt-1 " style="width: 60px">
+            <label>Year: </label>
+        </div>
+
+        <div class="col-3 ">
+            <input type="number" class="form-control" name="year" required>
+        </div>
+
+
+        <!-- Cycle -->
+        <div class="col-1 pt-1 " style="width: 60px">
+            <label>Cycle: </label>
+        </div>
+
+        <div class="col-3 ">
+            <select class="form-select" name="cycle" required>
+                <option value="" disabled selected>Choose cycle...</option>
+                <option value="1">Cycle 1</option>
+                <option value="2">Cycle 2</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-1 pt-3 pb-3 ">
+            <button type="submit" class="btn btn-primary ">Submit</button>
+        </div>
     </div>
 </form>
+<hr>
 
-<form class="form-inline">
-  <div class="form-group mb-2">
-    <label for="staticEmail2" class="sr-only">Email</label>
-    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-  </div>
-  <div class="form-group mx-sm-3 mb-2">
-    <label for="inputPassword2" class="sr-only">Password</label>
-    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-</form>
+
+<table class="table table-striped">
+    <thead class = "table-dark">
+        <tr>
+            <th scope = "col"> ID number </th>
+            <th scope = "col"> Date </th>
+            <th scope = "col"> Cycle </th>
+            <th scope = "col"> Total Pay </th>
+            <th scope = "col"> Options </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in ptest %}
+        <tr>
+            
+            <td> {{e.getIDNumber.getID}} </td>
+            <td> {{e.getMonth}} </td>
+            <td> {{e.getPay_cycle}} </td>
+            <td> {{e.getTotal_pay}} </td>
+            <td> <a class="btn btn-primary" href="{% url 'view_payslip' pk=e.pk %}">View</button> </a>
+        
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}
 
 
+
+
+<!-- VOID -->
 {% comment %} {% extends 'payroll_app/base.html' %}
 
 {% block content %}
@@ -99,5 +195,5 @@
             {% endfor %}
         </tbody>
     </table>
-    </div>
+</div>
 {% endblock %}  {% endcomment %}

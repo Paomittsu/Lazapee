@@ -200,6 +200,8 @@ def view_payslip(request, pk):
         'deductions': deductions,
     }
 
+    return render(request, 'payroll_app/view_payslip.html', context)
+
 
 
 # void
